@@ -1,0 +1,368 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <!-- <xacro:include filename="inertial_macros.xacro"/> -->
+
+    <material name="white"><color rgba="1 1 1 1" /></material>
+    <material name="orange"><color rgba="1 0.3 0.1 1"/></material>
+    <material name="blue"><color rgba="0.2 0.2 1 1"/></material>
+    <material name="black"> <color rgba="0 0 0 1"/></material>
+    <material name="red"> <color rgba="1 0 0 1"/> </material>
+
+  <!-- <link name="base_link">
+  </link> -->
+
+  <!-- <joint name="base_footprint_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="base_footprint"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint> -->
+
+  <link name="base_footprint">
+  </link>
+
+  <joint name="chasis_joint" type="fixed">
+      <parent link="base_footprint"/>
+      <child link="chasis"/>
+      <origin xyz="0 0 0.3"/>
+  </joint>
+
+  <link
+    name="chasis">
+    <inertial>
+      <origin
+        xyz="-0.157846867442155 -0.000989052560236107 -0.0680335267976939"
+        rpy="0 0 0" />
+      <mass
+        value="18.1359753389544" />
+      <inertia
+        ixx="0.127188900061596"
+        ixy="0.00127771276303175"
+        ixz="0.0155807596218243"
+        iyy="0.318764111671866"
+        iyz="-1.02262360682995E-05"
+        izz="0.329891663157573" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.2 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find rat20_movil)/meshes/chasis.stl" >
+          <!-- <scale>5.5 5.5 5.5</scale> -->
+        </mesh>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.2 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find rat20_movil)/meshes/chasis.stl" >
+          <!-- <scale>5.5 5.5 5.5</scale> -->
+        </mesh>
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="rueda1">
+    <inertial>
+      <origin
+        xyz="-1.4065E-06 0.10103 -1.5434E-06"
+        rpy="0 0 0" />
+      <mass
+        value="2.2464" />
+      <inertia
+        ixx="0.0080454"
+        ixy="-1.5261E-07"
+        ixz="4.5373E-08"
+        iyy="0.011889"
+        iyz="1.2493E-07"
+        izz="0.0080452" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find rat20_movil)/meshes/rueda1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+    
+      
+      <origin
+        xyz="0 0.1 0"
+        rpy="1.57 0 0" />
+      <geometry>
+        <cylinder length="0.03" radius="0.13"/>
+      </geometry>
+      <!-- <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find rat20_movil)/meshes/rueda1.STL" />
+      </geometry> -->
+    </collision>
+  </link>
+  <joint
+    name="eje1"
+    type="continuous">
+    <origin
+      xyz="0.054 0.1651 -0.1548"
+      rpy="0 0 0" />
+    <parent
+      link="chasis" />
+    <child
+      link="rueda1" />
+    <axis
+      xyz="0 1 0" />
+    <dynamics damping="10" friction="10" />
+  </joint>
+  <link
+    name="rueda2">
+    <inertial>
+      <origin
+        xyz="7.4926E-07 -0.10103 -2.017E-06"
+        rpy="0 0 0" />
+      <mass
+        value="2.2464" />
+      <inertia
+        ixx="0.0080453"
+        ixy="-1.8789E-07"
+        ixz="-8.2136E-08"
+        iyy="0.011889"
+        iyz="-6.6037E-08"
+        izz="0.0080453" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find rat20_movil)/meshes/rueda2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+
+      <origin
+        xyz="0 -0.1 0"
+        rpy="1.57 0 0" />
+      <geometry>
+        <cylinder length="0.03" radius="0.13"/>
+      </geometry>
+      <!-- <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find rat20_movil)/meshes/rueda2.STL" />
+      </geometry> -->
+    </collision>
+  </link>
+  <joint
+    name="eje2"
+    type="continuous">
+    <origin
+      xyz="0.054 -0.1651 -0.1548"
+      rpy="0 0 0" />
+    <parent
+      link="chasis" />
+    <child
+      link="rueda2" />
+    <axis
+      xyz="0 1 0" />
+    <dynamics damping="10" friction="10" />
+  </joint>
+  <link
+    name="rueda3">
+    <inertial>
+      <origin
+        xyz="-8.361E-07 0.10103 -1.9199E-06"
+        rpy="0 0 0" />
+      <mass
+        value="2.2464" />
+      <inertia
+        ixx="0.0080453"
+        ixy="-1.8473E-07"
+        ixz="7.9936E-08"
+        iyy="0.011889"
+        iyz="6.965E-08"
+        izz="0.0080453" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find rat20_movil)/meshes/rueda3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+
+      <origin
+        xyz="0 0.1 0"
+        rpy="1.57 0 0" />
+      <geometry>
+        <cylinder length="0.03" radius="0.13"/>
+      </geometry>
+
+      <!-- <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find rat20_movil)/meshes/rueda3.STL" />
+      </geometry> -->
+    </collision>
+  </link>
+  <joint
+    name="eje3"
+    type="continuous">
+    <origin
+      xyz="-0.446 0.1651 -0.1548"
+      rpy="0 0 0" />
+    <parent
+      link="chasis" />
+    <child
+      link="rueda3" />
+    <axis
+      xyz="0 1 0" />
+    <dynamics damping="10" friction="10" />
+  </joint>
+  <link
+    name="rueda4">
+    <inertial>
+      <origin
+        xyz="1.2559E-06 -0.10103 -1.7119E-06"
+        rpy="0 0 0" />
+      <mass
+        value="2.2464" />
+      <inertia
+        ixx="0.0080454"
+        ixy="-1.6361E-07"
+        ixz="-5.8531E-08"
+        iyy="0.011889"
+        iyz="-1.1205E-07"
+        izz="0.0080453" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find rat20_movil)/meshes/rueda4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+
+      <origin
+        xyz="0 -0.1 0"
+        rpy="1.57 0 0" />
+      <geometry>
+        <cylinder length="0.03" radius="0.13"/>
+      </geometry>
+      <!-- <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find rat20_movil)/meshes/rueda4.STL" />
+      </geometry> -->
+    </collision>
+  </link>
+  <joint
+    name="eje4"
+    type="continuous">
+    <origin
+      xyz="-0.446 -0.1651 -0.155"
+      rpy="0 0 0" />
+    <parent
+      link="chasis" />
+    <child
+      link="rueda4" />
+    <axis
+      xyz="0 1 0" />
+    <dynamics damping="10" friction="10" />
+  </joint>
+
+
+<!-- FIN INCLUIDO DIRECTO DEL URDF -->
+
+
+
+
+<!-- CONFIGURACIONES ADICIONALES  -->
+
+    <gazebo reference="chasis">
+        <material>Gazebo/Grey </material>
+    </gazebo>
+
+    <gazebo reference="rueda1">
+      <!-- <material>Gazebo/Grey </material> -->
+        <kp value= "1000000.0" />
+        <kd value="100.0" />
+        <maxVel value= "1.0" />
+        <minDepth value= "0.00" />
+        <mu1 value="1.0"/>
+        <mu2 value="1.0"/>
+    </gazebo>
+
+    <gazebo reference="rueda2">
+        <kp value= "1000000.0" />
+        <kd value="100.0" />
+        <maxVel value= "1.0" />
+        <minDepth value= "0.00" />
+        <mu1 value="1.0"/>
+        <mu2 value="1.0"/>
+    </gazebo>
+
+    <gazebo reference="rueda3">
+        <kp value= "1000000.0" />
+        <kd value="100.0" />
+        <maxVel value= "1.0" />
+        <minDepth value= "0.00" />
+        <mu1 value="1.0"/>
+        <mu2 value="1.0"/>
+    </gazebo>
+
+    <gazebo reference="rueda4">
+        <kp value= "1000000.0" />
+        <kd value="100.0" />
+        <maxVel value= "1.0" />
+        <minDepth value= "0.00" />
+        <mu1 value="1.0"/>
+        <mu2 value="1.0"/>
+    </gazebo>
+
+</robot>

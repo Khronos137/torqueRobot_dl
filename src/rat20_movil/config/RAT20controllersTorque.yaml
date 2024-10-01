@@ -1,0 +1,36 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 20
+    # use_sim_time: true
+
+    joint_broad:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    controladorTorque:
+      type: effort_controllers/JointGroupEffortController
+
+    # cont_right:
+    #   type: effort_controllers/JointEffortController
+      # joint: right_wheel_joint
+
+    
+
+controladorTorque:
+  ros__parameters:
+    publish_rate: 20.0
+    joints: 
+      - eje1
+      - eje2
+      - eje3
+      - eje4
+
+    command_interfaces:
+      - effort
+
+    state_interfaces:
+      - position
+      - velocity
+      - effort
+
+    state_publish_rate: 20.0
+    action_monitor_rate: 20.0
